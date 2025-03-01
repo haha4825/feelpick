@@ -28,10 +28,6 @@ Feel Pick은 사용자의 기분 상태와 추가 사항을 입력받아 심리�
 
 <img src="https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white" alt="Figma" /> <img src="https://img.shields.io/badge/ERDCloud-041E42?style=for-the-badge&logoColor=white" alt="ERDCloud" />
 
-### [배포]
-
-<img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
-
 <br/>
 
 # 3. 데이터베이스 구성도
