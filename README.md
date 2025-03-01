@@ -18,8 +18,6 @@ Feel Pick은 사용자의 기분 상태와 추가 사항을 입력받아 심리�
 <img src="https://img.shields.io/badge/Thymeleaf-005F0F?style=for-the-badge&logo=thymeleaf&logoColor=white" alt="Thymeleaf" />
 
 ### [Database]
-
-<img src="https://img.shields.io/badge/postgresql-4169E1?style=for-the-badge&logo=postgresql&logoColor=white"/></a>
 <img src="https://img.shields.io/badge/H2-004088?style=for-the-badge&logoColor=white"/></a>
 
 ### [AI]
