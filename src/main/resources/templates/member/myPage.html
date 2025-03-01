@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Feel Pick!</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+
+<div class="navbar">
+  <div class="left">
+    <a href="/">Feel Pick!</a>
+  </div>
+</div>
+
+<h1 th:text="|${member.username} 계정 설정|">계정 설정</h1>
+
+<!-- Tabs -->
+<div id="tabMenu">
+  <span class="tabs" onclick="showTab('changePasswordTab')">비밀번호 변경</span>
+  <span class="tabs" onclick="showTab('deleteAccountTab')">회원탈퇴</span>
+  <span class="tabs" onclick="showTab('viewPostsTab')">내가 쓴 글</span>
+</div>
+
+<!-- Tab Content -->
+<div id="tabContents">
+  <div id="changePasswordTab" class="tab-content password-change">
+    <h2>비밀번호 변경</h2>
+    <form th:action="@{/member/myPage/change}" method="post" th:object="${passwordDto}" onsubmit="return changePassword()">
+
+      <input class="current-password" type="password" th:field="*{currentPassword}" th:placeholder="|현재 비밀번호|" onkeyup="document.querySelector('.change-message').classList.add('hide');" required /><br>
+      <div th:if="${#fields.hasGlobalErrors()}">
+        <div class="change-message" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
+      </div>
+
+      <input class="password" type="password" th:field="*{newPassword}" th:placeholder="|새로운 비밀번호|" onkeyup="validatePassword()" required /><br>
+      <div class="change-message password-message hide"></div>
+
+      <input class="confirm-password" type="password" th:field="*{confirmPassword}" th:placeholder="|새로운 비밀번호 확인|" onkeyup="validateConfirm()" required /><br>
+      <div class="change-message confirm-message hide"></div>
+
+      <button type="submit">변경</button>
+
+    </form>
+  </div>
+
+  <div id="deleteAccountTab" class="tab-content account-delete">
+    <h2>회원 탈퇴</h2>
+    <form th:action="@{/member/myPage/delete}" method="post" onsubmit="return confirm('정말 삭제를 원하십니까? 되돌릴 수 없습니다.');">
+      <button type="submit">탈퇴</button>
+    </form>
+  </div>
+
+  <div id="viewPostsTab" class="tab-content my-posts">
+    <h2>내가 쓴 글</h2>
+    <a th:href="@{/member/myPage/posts}" class="btn">작성 글 보러가기</a>
+  </div>
+</div>
+
+<script src="/script.js">
+
+</script>
+
+</body>
+</html>

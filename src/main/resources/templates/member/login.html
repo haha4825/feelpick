@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+    <title>Feel Pick!</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+
+<div class="navbar">
+    <div class="left">
+        <a href="/">Feel Pick!</a>
+    </div>
+</div>
+
+<h1>로그인</h1>
+<h2>Feel Pick의 멤버는 내가 만든 요리를 자랑할 수 있어요!</h2>
+
+<div class="login">
+<form th:action="@{/member/login}" method="post" th:object="${memberDto}">
+    <div class="login-username">
+        <input type="text" th:field="${memberDto.username}" th:placeholder="|사용자 이름|" required />
+    </div>
+    <div class="login-password">
+        <input type="password" th:field="${memberDto.password}" th:placeholder="|비밀번호|" required />
+    </div>
+
+    <div class="login-message" th:text="${loginResult == 'fail' ? '사용자 이름 또는 비밀번호가 올바르지 않습니다.' : ''}"></div>
+
+    <button type="submit">로그인</button>
+</form>
+</div>
+
+<p>계정이 없으신가요? <a href="/member/register">회원가입</a></p>
+
+</body>
+</html>

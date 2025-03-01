@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+  <title>Feel Pick!</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+
+<div class="navbar">
+  <div class="left">
+    <a href="/">Feel Pick!</a>
+  </div>
+</div>
+
+<h1 th:text="|최고의 선택, ${food.name}!|"></h1>
+
+<!-- 레시피 링크 및 유튜브 영상 -->
+<div class="foodinfo recipe">
+<h2>직접 요리해보고 싶어요🧑‍🍳</h2>
+<h3><a th:href="${food.recipeUrl}" target="_blank">만개의레시피</a>가 레시피를 알려줄거에요!</h3>
+</div>
+
+<div class="foodinfo video">
+<h2>먹방 영상을 보고 싶어요📺</h2>
+<h3><a th:href="${food.videoUrl}" target="_blank">유튜브</a>에서 보고 싶은 먹방 영상을 선택할 수 있어요!</h3>
+</div>
+
+<div class="foodinfo show_off">
+<h2>오늘 나도 먹었어요☺️</h2>
+<h3><a th:if="${session.LOGIN_MEMBER != null}" th:href="|/post/create/${food.id}|" class="button">나도 자랑할래요</a></h3>
+  <div class="post" th:each="post : ${posts}">
+    <div th:each="imageFile : ${post.imageFiles}">
+      <img th:src="|/post/images/${imageFile.storeFileName}|" >
+    </div>
+
+    <div class="post-form">
+      <div class="post-writer" th:text="${post.member.username}"></div>
+      <div class="post-content" th:text="${post.content}"></div>
+      <div class="post-date" th:text="|${post.createdDateTime.toLocalDate()} ${post.createdDateTime.getHour()}:${post.createdDateTime.getMinute()}|"></div>
+
+      <!-- 수정 및 삭제 버튼 -->
+      <div class="post-modify" >
+        <form th:if="${session.LOGIN_MEMBER != null && post.member.username == session.LOGIN_MEMBER.username}" th:action="|/post/modify/${post.id}|" method="get">
+          <button type="submit">수정</button>
+        </form>
+      </div>
+
+      <div class="post-delete" th:if="${session.LOGIN_MEMBER != null && post.member.username == session.LOGIN_MEMBER.username}">
+        <form th:action="|/post/delete/${post.id}|" method="post" onsubmit="return confirm('정말 삭제를 원하십니까? 되돌릴 수 없습니다.');">
+          <button type="submit">삭제</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+</body>
+</html>

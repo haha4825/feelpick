@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+  <title>Feel Pick!</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="/style.css" />
+</head>
+
+<body>
+
+<div class="navbar">
+  <div class="left">
+    <a href="/">Feel Pick!</a>
+  </div>
+</div>
+
+<h1>내가 만든 요리 자랑하기</h1>
+<h2>요리와 함께 가장 기억하고 싶은 한 순간을 기록해보세요!</h2>
+
+<form th:action="|/post/create/${foodId}|" method="post" enctype="multipart/form-data" id="write-form" th:object="${postDto}">
+  <textarea th:field="*{content}" rows="10" cols="50" autofocus="autofocus"></textarea><br>
+  <input type="file" id="imageFiles" name="imageFiles" style="display: none" required><br>
+  <label class="image-label" for="imageFiles">사진 업로드</label>
+  <span id="image-span" class="image-span">선택된 사진이 없습니다.</span>
+</form>
+
+<form th:action="${returnAddress}" method="get" id="write-cancel">
+</form>
+
+<button type="submit" form="write-form" style="margin-right: 10px">작성</button>
+<button type="submit" form="write-cancel" style="margin-left: 10px">취소</button>
+
+<script>
+  const fileInput = document.getElementById('imageFiles');
+  const fileName = document.getElementById('image-span');
+
+  fileInput.addEventListener('change', function() {
+    if (fileInput.files.length > 0) {
+      fileName.textContent = fileInput.files[0].name;
+    }
+    else{
+      fileName.textContent = "선택된 사진이 없습니다.";
+    }
+  });
+
+</script>
+
+
+</body>
+</html>
